@@ -3,7 +3,6 @@ using Application.Employees.Dto;
 using Application.Roles.DTO;
 using AuthWebApp.Service.UserLogins.Dto;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RoleWebApi.Services;
@@ -60,7 +59,6 @@ namespace SolutionWebApi.Controllers
                 var claims = new[]
                 {
                     new  Claim(JwtRegisteredClaimNames.Sub , response.Id.ToString() ),
-                    new  Claim(ClaimTypes.Role, response.Role),
                     new Claim("other","other")
                  };
 

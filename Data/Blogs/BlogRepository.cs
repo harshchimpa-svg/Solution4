@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ public class BlogRepository : IBlogRepository
 
         public async Task DeleteBlog(int id)
     {
-        var blog = await _context.Blogs.Fi();
+        var blog = await _context.Blogs.FirstAsync();
         _context.Blogs.Remove(blog);
     }
 

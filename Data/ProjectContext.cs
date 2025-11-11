@@ -1,15 +1,25 @@
-﻿namespace Data
-{
-    internal class ProjectContext
-    {
-        public object Blogs { get; internal set; }
-        public object ResetPasswordCodes { get; internal set; }
-        public object Employees { get; internal set; }
-        public object Roles { get; internal set; }
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
+using YourAppNamespace.Models;
 
-        internal async Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+namespace Data;
+
+public class ProjectContext : DbContext
+{
+
+    public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
+    {
+
     }
+
+    public DbSet<Role> Roles { get; set; }
+
+    public DbSet<Employee> Employees { get; set; }
+
+    public DbSet<Blog> Blogs { get; set; }
+
+    public DbSet<ResetPasswordCode> ResetPasswordCodes { get; set; }
+
+
+
 }

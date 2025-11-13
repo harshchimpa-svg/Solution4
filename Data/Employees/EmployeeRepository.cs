@@ -56,7 +56,7 @@ namespace Data.Employees
         {
             return await _context.Employees
              .FirstOrDefaultAsync(x => x.Id == id && x.PasswordHash == password);
-
+        
         }
 
         public async Task<string> ResetPasswordCode(string emailId, int userId, string ipAddress)

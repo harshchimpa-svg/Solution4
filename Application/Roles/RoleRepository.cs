@@ -4,11 +4,7 @@ using Domain;
 
 namespace Application.Roles
 {
-    public class RoleRepository : IRoleApplication
-    {
-        private readonly IRoleApplication _roleRepository;
-    }
-    public class RoleApplication
+    public class RoleApplication : IRoleApplication
     {
         private readonly IRoleRepository _roleRepository;
 

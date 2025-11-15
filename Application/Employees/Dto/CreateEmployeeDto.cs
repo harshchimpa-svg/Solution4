@@ -2,7 +2,7 @@
 
 namespace Application.Roles.DTO;
 
-public class CreateEmployeeDto
+public class CreateUserDto
 {
 
     [Required(ErrorMessage = "Name is required")]

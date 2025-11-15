@@ -1,5 +1,5 @@
-﻿using Application.Employees;
-using Application.Employees.Dto;
+﻿using Application.Users;
+using Application.Users.Dto;
 using Application.Roles.DTO;
 using AuthWebApp.Service.UserLogins.Dto;
 using Microsoft.AspNetCore.Authorization;
@@ -9,18 +9,19 @@ using RoleWebApi.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Employees.Dto;
 
 namespace SolutionWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IEmployeeApplication _employee;
+        private readonly IUserApplication _employee;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
 
-        public EmployController(IEmployeeApplication employee,
+        public UserController(IUserApplication employee,
             IConfiguration configuration,
             IEmailService emailService)
         {
@@ -30,12 +31,12 @@ namespace SolutionWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateEmployeeDto input)
+        public async Task<IActionResult> Post(CreateUserDto input)
         {
             try
             {
 
-                var id = await _employee.CreateEmployee(input);
+                var id = await _employee.CreateUser(input);
                 return Ok(id);
 
             }
@@ -46,7 +47,7 @@ namespace SolutionWebApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> EmployeeLogin(LoginDto input)
+        public async Task<IActionResult> UserLogin(LoginDto input)
         {
             try
             {
@@ -130,7 +131,12 @@ namespace SolutionWebApi.Controllers
 
         }
 
-
+        [HttpPut("{name}")]
+        public async Task<IActionResult> updateDTO(string name)
+        {
+            var result = await _employee.updateDTO(name);
+            return Ok(result);
+        }
 
         [HttpPut("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto input)
@@ -146,7 +152,13 @@ namespace SolutionWebApi.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            await _employee.DeleteUser(id);
+            return Ok("user deleted successfully!");
         }
         private async Task SendResetPasswordEmail(string email, string code)
         {

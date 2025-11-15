@@ -1,21 +1,22 @@
 ﻿using Domain;
 using YourAppNamespace.Models;
 
-namespace Data.Employees
+namespace Data.Users
 {
-    public interface IEmployeeRepository
+    public interface IUserRepository
     {
 
-        Task<Employee> CreateEmployee(Employee employee);
+        Task<User> CreateUser(User employee);
 
-        Task<Employee?> GetByEmail(string email);
-        Task<Employee?> GetById(int id);
+        Task<User?> GetByEmail(string email);
+        Task<User?> GetById(int id);
 
-        Task<Employee?> GetByIdAndPassword(int id, string password);
+        Task<User?> GetByIdAndPassword(int id, string password);
 
-        Task UpdateEmployee(Employee input);
+        Task DeleteUser(int id);
+        Task UpdateUser(User input);
 
-        Task<Employee?> LoginAsync(string email, string password);
+        Task<User?> LoginAsync(string email, string password);
 
 
 

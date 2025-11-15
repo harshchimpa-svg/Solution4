@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain;
 
-public class Employee
+public class User
 {
     [Key]
     public int Id { get; set; }
@@ -13,9 +13,4 @@ public class Employee
     public bool IsEnabled { get; set; } = true;
     public DateTime CreatedDate { get; set; }
     public DateTime? UpdatedDate { get; set; }
-
-    [ForeignKey("RoleId")]
-    public int RoleId { get; set; }
-    public Role Role { get; set; }
-
 }

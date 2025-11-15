@@ -7,54 +7,59 @@ using System.Text;
 using System.Threading.Tasks;
 using YourAppNamespace.Models;
 
-namespace Data.Employees
+namespace Data.Users
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ProjectContext _context;
 
-        public EmployeeRepository(ProjectContext context)
+        public UserRepository(ProjectContext context)
         {
             _context = context;
         }
 
-        public async Task<Employee> CreateEmployee(Employee employee)
+        public async Task<User> CreateUser(User employee)
         {
-            _context.Employees.Add(employee);
+            _context.Users.Add(employee);
             await _context.SaveChangesAsync();
             return employee;
         }
-
-        public async Task UpdateEmployee(Employee input)
+        public async Task DeleteUser(int id)
         {
-            _context.Employees.Update(input);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
         }
-        public async Task<Employee?> GetByEmail(string email)
+        public async Task UpdateUser(User input)
+        {
+            _context.Users.Update(input);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<User?> GetByEmail(string email)
         {
 
-            return await _context.Employees
+            return await _context.Users
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
 
 
-        public async Task<Employee?> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
 
-            return await _context.Employees.FindAsync(id);
+            return await _context.Users.FindAsync(id);
         }
 
-        public async Task<Employee?> LoginAsync(string email, string password)
+        public async Task<User?> LoginAsync(string email, string password)
         {
-            return await _context.Employees
+            return await _context.Users
                 .FirstOrDefaultAsync(x => x.Email == email
             && x.PasswordHash == password);
 
         }
 
-        public async Task<Employee?> GetByIdAndPassword(int id, string password)
+        public async Task<User?> GetByIdAndPassword(int id, string password)
         {
-            return await _context.Employees
+            return await _context.Users
              .FirstOrDefaultAsync(x => x.Id == id && x.PasswordHash == password);
         
         }

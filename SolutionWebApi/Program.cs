@@ -1,11 +1,8 @@
 
-using Application.Blogs;
-using Application.Employees;
+using Application.Users;
 using Application.Roles;
 using Data;
-using Data.Blogs;
-using Data.Employees;
-using Data.Roles;
+using Data.Users;
 using Microsoft.EntityFrameworkCore;
 using RoleWebApi.Services;
 
@@ -22,12 +19,8 @@ builder.Services.AddDbContext<ProjectContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IBlogRepository, BlogRepository>();
-builder.Services.AddTransient<IBlogApplication, BlogApplication>();
-builder.Services.AddTransient<IEmployeeApplication,EmployeeApplication >();
-builder.Services.AddTransient<IRoleApplication,RoleApplication>();
-builder.Services.AddTransient<IEmployeeRepository,EmployeeRepository>();
-builder.Services.AddTransient<IRoleRepository,RoleRepository>();
+builder.Services.AddTransient<IUserApplication,UserApplication >();
+builder.Services.AddTransient<IUserRepository,UserRepository>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 var app = builder.Build();
 

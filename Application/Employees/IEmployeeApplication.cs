@@ -1,13 +1,15 @@
-﻿using Application.Employees.Dto;
+﻿using Application.Users.Dto;
 using Application.Roles.DTO;
 using AuthWebApp.Service.UserLogins.Dto;
 
-namespace Application.Employees
+namespace Application.Users
 {
-    public interface IEmployeeApplication
+    public interface IUserApplication
     {
-        Task<int> CreateEmployee(CreateEmployeeDto input);
+        Task updateDTO(string name, Employees.Dto.updateDTO input);
+        Task<int> CreateUser(CreateUserDto input);
         Task<LoginResponseDto> LoginAsync(LoginDto dto);
+        Task DeleteUser(int id);
 
         Task<bool> ChangePasswordAsync(int id, ChangePasswordDto dto);
 
